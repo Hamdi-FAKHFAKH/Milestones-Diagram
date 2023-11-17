@@ -10,7 +10,7 @@
 
 <p align="center">
     <a href="https://github.com/Hamdi-FAKHFAKH/Milestones-Diagram.git">
-        <img src="./milestones-diagram.jpg">
+       ![milestones-diagram](https://github.com/Hamdi-FAKHFAKH/Milestones-Diagram/assets/98355331/9ca9741d-c333-4689-9e89-f3d2d4410c1f)
     </a>
 </p>
 
