@@ -57,6 +57,10 @@ var milestonesDiagram = new MilestonesDiagram("#milestonesDiagram", tasks, {
     view_mode: 'Day',
     date_format: 'YYYY-MM-DD',
     custom_popup_html: null
+    showDate:true
+    firstDate : null
+    lastDate : null
+
 });
 ```
 
