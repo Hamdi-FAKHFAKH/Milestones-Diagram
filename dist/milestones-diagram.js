@@ -1288,7 +1288,7 @@ var MilestonesDiagram = (function () {
                 }
                 if (this.options.lastDate) {
                     this.gantt_end = this.options.lastDate
-                    this.gantt_end = date_utils.add(this.gantt_end, -1, 'year');
+                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'year');
                 } else {
                     this.gantt_end = date_utils.add(this.gantt_end, 1, 'year');
                 }
@@ -1909,25 +1909,6 @@ var MilestonesDiagram = (function () {
                 $bar_progress.min_dx = -$bar_progress.getWidth();
                 $bar_progress.max_dx = $bar.getWidth() - $bar_progress.getWidth();
             });
-
-            // $.on(this.$svg, 'mousemove', (e) => {
-            //     if (!is_resizing) return;
-            //     let dx = e.offsetX - x_on_start;
-            //     e.offsetY - y_on_start;
-
-            //     if (dx > $bar_progress.max_dx) {
-            //         dx = $bar_progress.max_dx;
-            //     }
-            //     if (dx < $bar_progress.min_dx) {
-            //         dx = $bar_progress.min_dx;
-            //     }
-
-            //     const $handle = bar.$handle_progress;
-            //     $.attr($bar_progress, 'width', $bar_progress.owidth + dx);
-            //     $.attr($handle, 'points', bar.get_progress_polygon_points());
-            //     $bar_progress.finaldx = dx;
-            // });
-
             $.on(this.$svg, 'mouseup', () => {
                 is_resizing = false;
                 if (!($bar_progress && $bar_progress.finaldx)) return;
