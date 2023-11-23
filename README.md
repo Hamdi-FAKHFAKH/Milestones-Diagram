@@ -137,4 +137,4 @@ Assuming the last commit (or a couple of commits) were enhancements or fixes,
 License: MIT
 
 ------------------
-Project maintained by [frappe](https://github.com/frappe)
+Project maintained by [FAKHFAKH Hamdi](https://github.com/Hamdi-FAKHFAKH)
