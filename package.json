@@ -1,6 +1,6 @@
 {
   "name": "milestones-diagram",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "description": "A simple, modern, interactive milestones diagram library for the web",
   "main": "src/index.js",
   "scripts": {
