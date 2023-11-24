@@ -775,6 +775,10 @@ var MilestonesDiagram = (function () {
                 const diff = date_utils.diff(task_start, gantt_start, 'day');
                 x = (diff * column_width) / 30;
             }
+            if (this.gantt.view_is('Year')) {
+                const diff = date_utils.diff(task_start, gantt_start, 'day');
+                x = (diff * column_width) / 360;
+            }
             return x;
         }
 
@@ -1118,7 +1122,8 @@ var MilestonesDiagram = (function () {
                 custom_popup_html: null,
                 language: 'en',
                 showDate: true,
-                lastDate: null
+                lastDate: null,
+                firstDate: null
             };
             this.options = Object.assign({}, default_options, options);
         }
@@ -1230,8 +1235,8 @@ var MilestonesDiagram = (function () {
                 this.options.step = 24 * 30;
                 this.options.column_width = 120;
             } else if (view_mode === VIEW_MODE.YEAR) {
-                this.options.step = 24 * 365;
-                this.options.column_width = 120;
+                this.options.step = 24 * 360;
+                this.options.column_width = 400;
             }
         }
 
@@ -1265,20 +1270,27 @@ var MilestonesDiagram = (function () {
                     this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
                 }
             } else if (this.view_is(VIEW_MODE.MONTH)) {
-                this.gantt_start = date_utils.start_of(this.gantt_start, 'year');
+                if (this.options.firstDate) {
+                    this.gantt_start = date_utils.add(this.options.firstDate, -1, 'month');;
+                } else {
+                    this.gantt_start = date_utils.add(this.options.firstDate, -1, 'month');;
+                }
                 if (this.options.lastDate) {
-                    this.gantt_end = this.options.lastDate
-                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
+                    this.gantt_end = date_utils.add(this.options.lastDate, 1, 'month');
                 } else {
                     this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
                 }
             } else if (this.view_is(VIEW_MODE.YEAR)) {
-                this.gantt_start = date_utils.add(this.gantt_start, 1, 'year');
+                if (this.options.firstDate) {
+                    this.gantt_start = date_utils.add(this.options.firstDate, -1, 'year');
+                } else {
+                    this.gantt_start = date_utils.start_of(this.gantt_start, 'year');
+                }
                 if (this.options.lastDate) {
                     this.gantt_end = this.options.lastDate
-                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
+                    this.gantt_end = date_utils.add(this.gantt_end, -1, 'year');
                 } else {
-                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
+                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'year');
                 }
             } else {
                 this.gantt_start = date_utils.add(this.gantt_start, 1, 'month');
@@ -1487,19 +1499,84 @@ var MilestonesDiagram = (function () {
                     append_to: this.layers.grid,
                 });
             }
+            if (this.view_is(VIEW_MODE.MONTH)) {
+                const diff = date_utils.diff(date_utils.today(), this.gantt_start, 'day');
+                const x = (diff * this.options.column_width) / 30;
+                const y = 0;
+                const width = this.options.column_width / 30;
+                const height =
+                    (this.options.bar_height + this.options.padding) *
+                    this.tasks.length +
+                    this.options.header_height +
+                    this.options.padding / 2;
+
+                createSVG('rect', {
+                    x,
+                    y,
+                    width,
+                    height,
+                    class: 'today-highlight',
+                    append_to: this.layers.grid,
+                });
+            }
+            if (this.view_is(VIEW_MODE.YEAR)) {
+                const diff = date_utils.diff(date_utils.today(), this.gantt_start, 'day');
+                const x = (diff * this.options.column_width) / 360;
+                const y = 0;
+                const width = this.options.column_width / 30;
+                const height =
+                    (this.options.bar_height + this.options.padding) *
+                    this.tasks.length +
+                    this.options.header_height +
+                    this.options.padding / 2;
+
+                createSVG('rect', {
+                    x,
+                    y,
+                    width,
+                    height,
+                    class: 'today-highlight',
+                    append_to: this.layers.grid,
+                });
+            }
         }
 
         make_dates() {
             if (this.options.showDate) {
+                let i = 1
                 for (let date of this.get_dates_to_draw()) {
-                    createSVG('text', {
-                        x: date.lower_x,
-                        y: date.lower_y,
-                        innerHTML: date.lower_text,
-                        class: 'lower-text',
-                        append_to: this.layers.date,
-                    });
 
+                    if (this.view_is(VIEW_MODE.YEAR)) {
+                        console.log(date.lower_text)
+                        const diff = date_utils.diff(new Date(parseInt(date.lower_text), 0, 2), this.gantt_start, 'day');
+                        const x = (diff * this.options.column_width) / 360;
+                        const diff1 = date_utils.diff(new Date(parseInt(date.lower_text), 5, 20), this.gantt_start, 'day');
+                        const x1 = (diff1 * this.options.column_width) / 360;
+                        createSVG('text', {
+                            x: x1,
+                            y: date.lower_y,
+                            innerHTML: date.lower_text,
+                            class: 'lower-text',
+                            append_to: this.layers.date,
+                        });
+                        createSVG('rect', {
+                            x: x,
+                            y: date.lower_y,
+                            width: 1,
+                            height: 17,
+                            append_to: this.layers.date,
+                        });
+                        i++
+                    }
+                    else {
+                        createSVG('text', {
+                            x: date.lower_x,
+                            y: date.lower_y,
+                            innerHTML: date.lower_text,
+                            class: 'lower-text',
+                            append_to: this.layers.date,
+                        });
+                    }
                     if (date.upper_text) {
                         const $upper_text = createSVG('text', {
                             x: date.upper_x,

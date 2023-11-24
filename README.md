@@ -56,9 +56,50 @@ var milestonesDiagram = new MilestonesDiagram("#milestonesDiagram", tasks, {
     padding: 18,
     view_mode: 'Day',
     date_format: 'YYYY-MM-DD',
-    custom_popup_html: null
+    custom_popup_html: null,
+    showDate: true ,
+    firstDate : null,
+    lastDate : null
 });
 ```
+
+
+### Rendering options
+**header_height** : *[*Number*](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number)*  
+Diagram header height  
+
+**column_width** : *[*Number*](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number)*   
+Diagram column width  
+
+**view_modes** : *[String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String) [ ] = ['Quarter Day', 'Half Day', 'Day', 'Week', 'Month']*  
+Diagram time scale  
+
+**bar_height** : *[*Number*](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number)*    
+Diagram bars height  
+
+**bar_corner_radius** : *[*Number*](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number)*  
+Border-radius value of diagram bars 
+
+**padding** : *[*Number*](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number)*  
+Padding between bars 
+
+**view_mode** : *[String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String)*      
+Selected time scale
+
+**date_format** : *[String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String)*  
+Date format  
+
+**custom_popup_html** : *[Function (task: any)](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Function) : [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String)*   
+Return custom HTML to be displayed in the popup  
+
+**showDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = true*  
+Show diagram header  
+
+**lastDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = null*  
+Last date to display in header
+
+**firstDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = null*  
+First date to display in the header  
 
 ### Contributing
 If you want to contribute enhancements or fixes:
@@ -96,5 +137,4 @@ Assuming the last commit (or a couple of commits) were enhancements or fixes,
 License: MIT
 
 ------------------
-Project maintained by [frappe](https://github.com/frappe)
-
+Project maintained by [FAKHFAKH Hamdi](https://github.com/Hamdi-FAKHFAKH)
