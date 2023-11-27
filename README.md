@@ -95,10 +95,10 @@ Return custom HTML to be displayed in the popup
 **showDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = true*  
 Show diagram header  
 
-**lastDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = null*  
+**lastDate** : *[Date](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date) = null*  
 Last date to display in header
 
-**firstDate** : *[boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Boolean) = null*  
+**firstDate** : *[Date](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Date) = null*  
 First date to display in the header  
 
 ### Contributing
