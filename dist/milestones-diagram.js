@@ -1293,12 +1293,16 @@ var MilestonesDiagram = (function () {
                     this.gantt_end = date_utils.add(this.gantt_end, 1, 'year');
                 }
             } else {
-                this.gantt_start = date_utils.add(this.gantt_start, 1, 'month');
-                if (this.options.lastDate) {
-                    this.gantt_end = this.options.lastDate
-                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
+                 if (this.options.firstDate) {
+                    this.gantt_start = date_utils.add(this.options.firstDate, -3, 'day');
                 } else {
-                    this.gantt_end = date_utils.add(this.gantt_end, 1, 'month');
+                    this.gantt_start = date_utils.start_of(this.gantt_start, 'month');
+                }
+                if (this.options.lastDate) {
+                    this.gantt_end = date_utils.add(this.options.lastDate, 3, 'day');
+                    console.log(this.gantt_end );
+                } else {
+                    this.gantt_end = date_utils.add(this.gantt_end, 3, 'day');
                 }
             }
         }
