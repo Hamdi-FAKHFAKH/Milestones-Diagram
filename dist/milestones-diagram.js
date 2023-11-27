@@ -1292,15 +1292,25 @@ var MilestonesDiagram = (function () {
                 } else {
                     this.gantt_end = date_utils.add(this.gantt_end, 1, 'year');
                 }
-            } else {
+            } else if (this.view_is(VIEW_MODE.WEEK)) {
                  if (this.options.firstDate) {
+                    this.gantt_start = date_utils.add(this.options.firstDate, -8, 'day');
+                } else {
+                    this.gantt_start = date_utils.start_of(this.gantt_start, 'month');
+                }
+                if (this.options.lastDate) {
+                    this.gantt_end = date_utils.add(this.options.lastDate, 3, 'day');
+                } else {
+                    this.gantt_end = date_utils.add(this.gantt_end, 3, 'day');
+                }
+            } else {
+                if (this.options.firstDate) {
                     this.gantt_start = date_utils.add(this.options.firstDate, -3, 'day');
                 } else {
                     this.gantt_start = date_utils.start_of(this.gantt_start, 'month');
                 }
                 if (this.options.lastDate) {
                     this.gantt_end = date_utils.add(this.options.lastDate, 3, 'day');
-                    console.log(this.gantt_end );
                 } else {
                     this.gantt_end = date_utils.add(this.gantt_end, 3, 'day');
                 }
@@ -1551,7 +1561,6 @@ var MilestonesDiagram = (function () {
                 for (let date of this.get_dates_to_draw()) {
 
                     if (this.view_is(VIEW_MODE.YEAR)) {
-                        console.log(date.lower_text)
                         const diff = date_utils.diff(new Date(parseInt(date.lower_text), 0, 2), this.gantt_start, 'day');
                         const x = (diff * this.options.column_width) / 360;
                         const diff1 = date_utils.diff(new Date(parseInt(date.lower_text), 5, 20), this.gantt_start, 'day');
